@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Course Completion</title>
+  <style>
+    body {
+      background: #0e0e0e;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    button {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    input {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: none;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Complete the Program</h1>
+  <p>Enter your Discord name to announce your success!</p>
+  <input id="username" placeholder="e.g., Fraser#1234" />
+  <br>
+  <button onclick="sendToDiscord()">Announce Completion</button>
+
+  <script>
+    function sendToDiscord() {
+      const username = document.getElementById("username").value;
+      if (!username) {
+        alert("Please enter your Discord username.");
+        return;
+      }
+
+      fetch("https://discord.com/api/webhooks/1368513126525435956/BtTxT4B1PzBBz81zB02fHf0i7v1meiReohuVlmF0VF2PKsLo1BFXeF_G62eTpwe-mvdK", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: `🎉 **@${username} has just completed the Cellzier Reselling Program!**\nGive them a huge shoutout! 🔥📱`
+        })
+      }).then(res => {
+        if (res.ok) {
+          alert("🎉 Success! Your completion has been announced.");
+        } else {
+          alert("There was a problem. Try again later.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
