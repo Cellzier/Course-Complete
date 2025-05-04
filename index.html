@@ -1,45 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Course Completion</title>
+  <meta charset="UTF-8">
+  <title>Cellzier Completion</title>
   <style>
     body {
-      background: #0e0e0e;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 100px;
+      background-color: #0e0e0e;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
     }
-    button {
-      background-color: #5865F2;
-      color: white;
+
+    .container {
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #B28FFF;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      margin-bottom: 20px;
       border: none;
-      padding: 15px 30px;
-      font-size: 18px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #B28FFF;
+      color: #0e0e0e;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
-    input {
-      padding: 10px;
+
+    button:hover {
+      background-color: #a07af5;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 80px;
       margin-bottom: 20px;
-      border-radius: 5px;
-      border: none;
-      width: 300px;
     }
   </style>
 </head>
 <body>
-  <h1>🎉 Complete the Program</h1>
-  <p>Enter your Discord name to announce your success!</p>
-  <input id="username" placeholder="e.g., Fraser#1234" />
-  <br>
-  <button onclick="sendToDiscord()">Announce Completion</button>
+  <div class="container">
+    <img src="https://i.imgur.com/EU7I3Sl.png" alt="Cellzier Logo" class="logo" />
+    <h1>🎉 You're Official!</h1>
+    <p>Enter your Discord name and we’ll announce your certification in the server.</p>
+    <input id="discordName" placeholder="e.g., Fraser#1234" />
+    <br>
+    <button onclick="sendToDiscord()">Announce Completion</button>
+    <p id="result"></p>
+  </div>
 
   <script>
     function sendToDiscord() {
-      const username = document.getElementById("username").value;
+      const username = document.getElementById("discordName").value;
+      const result = document.getElementById("result");
+
       if (!username) {
-        alert("Please enter your Discord username.");
+        result.textContent = "⚠️ Please enter your Discord username.";
+        result.style.color = "orange";
         return;
       }
 
@@ -47,14 +98,19 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          content: `🎉 **@${username} has just completed the Cellzier Reselling Program!**\nGive them a huge shoutout! 🔥📱`
+          content: `🎓 **@${username} just completed the Cellzier Reselling Program!**\nLet’s give them a warm welcome to the certified community! 🚀📱`
         })
       }).then(res => {
         if (res.ok) {
-          alert("🎉 Success! Your completion has been announced.");
+          result.textContent = "✅ You're officially announced in the Discord!";
+          result.style.color = "lightgreen";
         } else {
-          alert("There was a problem. Try again later.");
+          result.textContent = "❌ Something went wrong. Please try again later.";
+          result.style.color = "red";
         }
+      }).catch(() => {
+        result.textContent = "❌ Network error.";
+        result.style.color = "red";
       });
     }
   </script>
