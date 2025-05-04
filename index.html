@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cellzier Completion</title>
+  <meta charset="UTF-8" />
+  <title>Cellzier Certified</title>
   <style>
     body {
-      background-color: #0e0e0e;
-      color: #ffffff;
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
+      background-color: #0e0e0e;
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 60px;
     }
 
     .container {
-      background: #1a1a1a;
-      padding: 40px;
+      background-color: #1a1a1a;
+      padding: 40px 30px;
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-      max-width: 500px;
-      width: 100%;
+      box-shadow: 0 0 20px rgba(178, 143, 255, 0.3);
       text-align: center;
+      max-width: 500px;
+      width: 90%;
     }
 
     h1 {
@@ -34,24 +42,25 @@
 
     p {
       font-size: 16px;
+      color: #ccc;
       margin-bottom: 20px;
     }
 
     input {
       width: 90%;
       padding: 12px;
-      margin-bottom: 20px;
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      margin-bottom: 20px;
     }
 
     button {
       background-color: #B28FFF;
       color: #0e0e0e;
-      border: none;
       padding: 12px 25px;
       font-size: 16px;
+      border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -65,20 +74,17 @@
       margin-top: 20px;
       font-weight: bold;
     }
-
-    .logo {
-      width: 80px;
-      margin-bottom: 20px;
-    }
   </style>
 </head>
 <body>
+  <!-- Cellzier Logo -->
+  <img src="translogo4.png" alt="Cellzier Logo" class="logo" />
+
   <div class="container">
-    <img src="https://i.imgur.com/EU7I3Sl.png" alt="Cellzier Logo" class="logo" />
     <h1>🎉 You're Official!</h1>
-    <p>Enter your Discord name and we’ll announce your certification in the server.</p>
+    <p>Enter your Discord username and we’ll announce your certification in the server.</p>
     <input id="discordName" placeholder="e.g., Fraser#1234" />
-    <br>
+    <br />
     <button onclick="sendToDiscord()">Announce Completion</button>
     <p id="result"></p>
   </div>
@@ -94,7 +100,7 @@
         return;
       }
 
-      fetch("https://discord.com/api/webhooks/1368513126525435956/BtTxT4B1PzBBz81zB02fHf0i7v1meiReohuVlmF0VF2PKsLo1BFXeF_G62eTpwe-mvdK", {
+      fetch("https://discord.com/api/webhooks/1368513126525435956/BtTxT4B1PzBBz81zB02fHf0i7v1meiReohuVlmF0VF2PKsLo1BFXeF_G62eTpwe-mvdk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
