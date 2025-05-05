@@ -90,54 +90,36 @@
     <p id="result"></p>
   </div>
 
-  <script>
-    function sendToDiscord() {
-      const username = document.getElementById("discordName").value;
-      const result = document.getElementById("result");
+ <script>
+  function sendToDiscord() {
+    const username = document.getElementById("discordName").value;
+    const result = document.getElementById("result");
 
-      // Check if already submitted
-      if (localStorage.getItem("cellzier_submitted") === "true") {
-        result.textContent = "✅ Submission already completed. You're good to go!";
+    if (!username) {
+      result.textContent = "⚠️ Please enter your Discord username.";
+      result.style.color = "orange";
+      return;
+    }
+
+    fetch("https://discord.com/api/webhooks/1368808175150563420/1WKa5xieFU3vtQ3llFbCw7BNrcOx1kGLdIeKM1QSaUqLJobHAEwSE9UfKXEMKNcwf1uW", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: `🎓 **@${username} Just Completed Cellzier - Become a Profitable Reseller**\nCongratulations on becoming Cellzier Certified! 🚀📱`
+      })
+    }).then(res => {
+      if (res.ok) {
+        result.textContent = "✅ Cellzier Certification Submitted";
         result.style.color = "lightgreen";
-        return;
-      }
-
-      if (!username) {
-        result.textContent = "⚠️ Please enter your Discord username.";
-        result.style.color = "orange";
-        return;
-      }
-
-      fetch("https://discord.com/api/webhooks/1368808175150563420/1WKa5xieFU3vtQ3llFbCw7BNrcOx1kGLdIeKM1QSaUqLJobHAEwSE9UfKXEMKNcwf1uW", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: `🎓 **@${username} Just Completed Cellzier - Become a Profitable Reseller**\nCongratulations on becoming Cellzier Certified! 🚀📱`
-        })
-      }).then(res => {
-        if (res.ok) {
-          result.textContent = "✅ Cellzier Certification Submitted";
-          result.style.color = "lightgreen";
-          localStorage.setItem("cellzier_submitted", "true"); // Save submission flag
-          document.getElementById("discordName").disabled = true;
-        } else {
-          result.textContent = "❌ Something went wrong. Please try again later.";
-          result.style.color = "red";
-        }
-      }).catch(() => {
-        result.textContent = "❌ Network error.";
+      } else {
+        result.textContent = "❌ Something went wrong. Please try again later.";
         result.style.color = "red";
-      });
-    }
-
-    // Optional: disable input on page load if already submitted
-    window.onload = function () {
-      if (localStorage.getItem("cellzier_submitted") === "true") {
-        document.getElementById("discordName").disabled = true;
-        document.getElementById("result").textContent = "✅ Submission already completed. You're good to go!";
-        document.getElementById("result").style.color = "lightgreen";
       }
-    }
-  </script>
+    }).catch(() => {
+      result.textContent = "❌ Network error.";
+      result.style.color = "red";
+    });
+  }
+</script>
 </body>
 </html>
