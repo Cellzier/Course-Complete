@@ -21,7 +21,7 @@
       position: absolute;
       top: 24px;
       left: 24px;
-      width: 120px; /* Bigger logo */
+      width: 120px;
     }
 
     .container {
@@ -108,11 +108,11 @@
         return;
       }
 
-      fetch("https://discord.com/api/webhooks/1368823909872439306/Y5nzgtjo-ddWEYd8bMHyuH7rsD_dljTMAvx_TamZVhej_E6KoQh59NUwaSOJWyXoOgIi", {
+      fetch("https://discord.com/api/webhooks/1368808175150563420/1WKa5xieFU3vtQ3llFbCw7BNrcOx1kGLdIeKM1QSaUqLJobHAEwSE9UfKXEMKNcwf1uW", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          content: 🎓 **@${username}** Completed Cellzier - Become a Profitable Reseller\nCongratulations on becoming Cellzier Certified! 🚀📱
+          content: `🎓 **@${username}** Completed Cellzier – Become a Profitable Reseller\nCongratulations on becoming Cellzier Certified! 🚀📱`
         })
       }).then(res => {
         if (res.ok) {
@@ -121,20 +121,19 @@
           localStorage.setItem("cellzier_submitted", "true");
           document.getElementById("discordName").disabled = true;
 
-          // 🎉 Pink & Purple Confetti Bursts
+          // 🎉 3 Confetti Bursts – Cellzier Purple & Pink
           const confettiColors = ['#B28FFF', '#FF85D1'];
           const burst = () => {
             confetti({
-              particleCount: 80,
-              spread: 70,
+              particleCount: 100,
+              spread: 80,
               origin: { y: 0.6 },
               colors: confettiColors,
             });
           };
-
           burst();
-          setTimeout(burst, 300);
-          setTimeout(burst, 600);
+          setTimeout(burst, 400);
+          setTimeout(burst, 800);
         } else {
           result.textContent = "❌ Something went wrong. Please try again later.";
           result.style.color = "red";
