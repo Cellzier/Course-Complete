@@ -82,11 +82,11 @@
   <img src="translogo4.png" alt="Cellzier Logo" class="logo" />
 
   <div class="container">
-    <h1>🎉 You're Official!</h1>
-    <p>Enter your Discord username and we’ll announce your certification in the server.</p>
-    <input id="discordName" placeholder="e.g., Fraser#1234" />
+    <h1>🎓 Congratulations on Completing Cellzier!</h1>
+    <p>Enter your Discord username to become Cellzier Certified</p>
+    <input id="discordName" placeholder="Enter Username" />
     <br />
-    <button onclick="sendToDiscord()">Announce Completion</button>
+    <button onclick="sendToDiscord()">Complete & Announce</button>
     <p id="result"></p>
   </div>
 
@@ -112,11 +112,11 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          content: `🎓 **@${username} just completed the Cellzier Reselling Program!**\nLet’s give them a warm welcome to the certified community! 🚀📱`
+          content: `🎓 **@${username} Just Completed Cellzier - Become a Profitable Reseller**\nCongratulations on becoming Cellzier Certified! 🚀📱`
         })
       }).then(res => {
         if (res.ok) {
-          result.textContent = "✅ You're officially announced in the Discord!";
+          result.textContent = "✅ Cellzier Certification Submitted";
           result.style.color = "lightgreen";
           localStorage.setItem("cellzier_submitted", "true"); // Save submission flag
           document.getElementById("discordName").disabled = true;
